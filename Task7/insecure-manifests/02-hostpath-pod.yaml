@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-hostpath
+  namespace: audit-zone
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      volumeMounts:
+        - mountPath: /app/config
+          name: config-volume
+  volumes:
+    - name: config-volume
+      hostPath:
+        # directory path on the host node
+        path: /etc
+        # type of the path (optional, but recommended)
+        type: DirectoryOrCreate
